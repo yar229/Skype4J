@@ -15,20 +15,28 @@
  * If not, see http://www.gnu.org/licenses/.
  */
 
-package com.samczsun.skype4j.events.chat;
+package com.samczsun.skype4j.chat.messages;
 
-import com.samczsun.skype4j.events.Event;
+import com.samczsun.skype4j.exceptions.ConnectionException;
+import com.samczsun.skype4j.formatting.Message;
 
-import java.io.IOException;
+/**
+ * Represents a message you sent
+ */
+public interface SentMessage extends ChatMessage {
 
-public class DisconnectedEvent extends Event {
-    private final IOException cause;
+    /**
+     * Edit this message
+     *
+     * @param newMessage The message to edit it to
+     * @throws ConnectionException If an exception occurs while connecting to the endpoint
+     */
+    void edit(Message newMessage) throws ConnectionException;
 
-    public DisconnectedEvent(IOException cause) {
-        this.cause = cause;
-    }
-
-    public IOException getCause() {
-        return this.cause;
-    }
+    /**
+     * Delete this message
+     *
+     * @throws ConnectionException If an exception occurs while connecting to the endpoint
+     */
+    void delete() throws ConnectionException;
 }

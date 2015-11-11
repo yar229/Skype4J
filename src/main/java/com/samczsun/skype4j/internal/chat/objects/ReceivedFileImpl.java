@@ -15,30 +15,33 @@
  * If not, see http://www.gnu.org/licenses/.
  */
 
-package com.samczsun.skype4j.chat;
+package com.samczsun.skype4j.internal.chat.objects;
 
-import com.samczsun.skype4j.exceptions.SkypeException;
-import com.samczsun.skype4j.formatting.Message;
+import com.samczsun.skype4j.chat.objects.ReceivedFile;
 
-/**
- * Represents a message you sent
- *
- * @author samczsun
- */
-public interface SentMessage extends ChatMessage {
+public class ReceivedFileImpl implements ReceivedFile {
+    private String name;
+    private long size;
+    private long tid;
 
-    /**
-     * Edit this message
-     *
-     * @param newMessage The message to edit it to
-     * @throws SkypeException If something goes wrong during the editing
-     */
-    void edit(Message newMessage) throws SkypeException;
+    public ReceivedFileImpl(String name, long size, long tid) {
+        this.name = name;
+        this.size = size;
+        this.tid = tid;
+    }
 
-    /**
-     * Delete this message
-     *
-     * @throws SkypeException If something goes wrong while deleting
-     */
-    void delete() throws SkypeException;
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public long getSize() {
+        return size;
+    }
+
+    @Override
+    public long getTid() {
+        return tid;
+    }
 }

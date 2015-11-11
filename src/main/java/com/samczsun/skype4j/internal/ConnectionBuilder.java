@@ -17,6 +17,9 @@
 
 package com.samczsun.skype4j.internal;
 
+import com.eclipsesource.json.JsonObject;
+import com.eclipsesource.json.JsonValue;
+
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -58,6 +61,11 @@ public class ConnectionBuilder {
         this.data = data;
     }
 
+    public void setData(JsonValue object) {
+        setData(object.toString());
+        addHeader("Content-Type", "application/json");
+    }
+
     public String getData() {
         return this.data;
     }
@@ -80,7 +88,7 @@ public class ConnectionBuilder {
         }
         con.setRequestMethod(method);
         con.setDoOutput(output);
-        if (data != null) {
+        if (data != null && output) {
             con.getOutputStream().write(data.getBytes(Charset.forName("UTF-8")));
         }
         return con;
